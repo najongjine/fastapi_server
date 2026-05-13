@@ -5,7 +5,6 @@ from dbconnect import getConnect
 
 # 데이터베이스 연결 확인. x 초마다 실행
 async def batch_job():
-    """Run a periodic job without a user request."""
     while True:
         try:
             conn = getConnect()
