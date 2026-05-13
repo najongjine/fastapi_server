@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Select Sample</title>
+    <style>
+      :root {
+        --page-bg: #f7f7f7;
+        --text-color: #222222;
+        --point-color: #2563eb;
+        --soft-color: #eef2ff;
+        --line-color: #dddddd;
+        --card-bg: #ffffff;
+        --card-radius: 6px;
+      }
+
+      body {
+        max-width: 900px;
+        margin: 36px auto;
+        padding: 0 20px;
+        font-family: Arial, sans-serif;
+        line-height: 1.5;
+        color: var(--text-color);
+        background: var(--page-bg);
+      }
+
+      body::before {
+        display: block;
+        width: fit-content;
+        margin-bottom: 14px;
+        padding: 6px 12px;
+        border: 1px solid var(--line-color);
+        border-radius: 999px;
+        background: var(--soft-color);
+        color: var(--point-color);
+        font-size: 13px;
+        font-weight: bold;
+      }
+
+      body[data-theme="farm"] {
+        --page-bg: #f4f8ee;
+        --text-color: #263522;
+        --point-color: #3f7d20;
+        --soft-color: #e5f1d5;
+        --line-color: #9fbd78;
+        --card-bg: #fffff7;
+        --card-radius: 10px;
+        max-width: 980px;
+      }
+
+      body[data-theme="farm"]::before {
+        content: "FARM MARKET";
+      }
+
+      body[data-theme="sea"] {
+        --page-bg: #eef8fb;
+        --text-color: #173244;
+        --point-color: #087ea4;
+        --soft-color: #d8f1f8;
+        --line-color: #8dc7d9;
+        --card-bg: #ffffff;
+        --card-radius: 2px;
+        max-width: 1040px;
+      }
+
+      body[data-theme="sea"]::before {
+        content: "SEA FRESH";
+      }
+
+      body[data-theme="fashion"] {
+        --page-bg: #fff5f8;
+        --text-color: #2d2530;
+        --point-color: #b83280;
+        --soft-color: #fde2ee;
+        --line-color: #e2a4c4;
+        --card-bg: #ffffff;
+        --card-radius: 14px;
+        max-width: 1100px;
+      }
+
+      body[data-theme="fashion"]::before {
+        content: "FASHION LOOK";
+      }
+
+      body[data-theme="etc"] {
+        --page-bg: #f8f6f0;
+        --text-color: #2f2f2f;
+        --point-color: #7c5c22;
+        --soft-color: #efe5cf;
+        --line-color: #c8b58b;
+        --card-bg: #ffffff;
+        --card-radius: 6px;
+        max-width: 860px;
+      }
+
+      body[data-theme="etc"]::before {
+        content: "BASIC NOTE";
+      }
+
+      h1 {
+        margin-bottom: 6px;
+        color: var(--point-color);
+        border-bottom: 4px solid var(--soft-color);
+        padding-bottom: 10px;
+      }
+
+      body[data-theme="fashion"] h1 {
+        text-align: center;
+        font-size: 42px;
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      body[data-theme="sea"] h1 {
+        border-left: 10px solid var(--point-color);
+        border-bottom: 0;
+        padding: 12px 0 12px 16px;
+        background: var(--soft-color);
+      }
+
+      body[data-theme="etc"] h1 {
+        border-bottom: 1px solid var(--line-color);
+        color: var(--text-color);
+      }
+
+      #sub-title {
+        margin-bottom: 24px;
+        color: #555555;
+      }
+
+      body[data-theme="fashion"] #sub-title {
+        text-align: center;
+      }
+
+      #list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 14px;
+      }
+
+      body[data-theme="sea"] #list,
+      body[data-theme="etc"] #list {
+        grid-template-columns: 1fr;
+      }
+
+      body[data-theme="fashion"] #list {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 22px;
+      }
+
+      article {
+        display: grid;
+        gap: 12px;
+        padding: 14px;
+        border: 1px solid var(--line-color);
+        border-radius: var(--card-radius);
+        background: var(--card-bg);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+      }
+
+      body[data-theme="sea"] article {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        align-items: center;
+        gap: 18px;
+        border-left: 6px solid var(--point-color);
+      }
+
+      body[data-theme="fashion"] article {
+        border-top: 6px solid var(--point-color);
+        padding: 0 0 16px;
+        overflow: hidden;
+      }
+
+      body[data-theme="farm"] article {
+        border-bottom: 6px solid var(--point-color);
+      }
+
+      body[data-theme="etc"] article {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        align-items: center;
+        gap: 14px;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      article p {
+        margin: 0;
+      }
+
+      body[data-theme="fashion"] article p {
+        padding: 0 16px;
+        font-size: 17px;
+      }
+
+      img {
+        width: 100%;
+        height: 220px;
+        object-fit: contain;
+        background: #ffffff;
+        border: 1px solid var(--line-color);
+        border-radius: calc(var(--card-radius) - 2px);
+      }
+
+      body[data-theme="sea"] img,
+      body[data-theme="etc"] img {
+        order: -1;
+      }
+
+      body[data-theme="sea"] img {
+        height: 180px;
+      }
+
+      body[data-theme="fashion"] img {
+        height: 300px;
+      }
+
+      body[data-theme="farm"] img {
+        height: 240px;
+      }
+
+      body[data-theme="etc"] img {
+        height: 140px;
+      }
+
+      @media (max-width: 640px) {
+        body[data-theme="sea"] article,
+        body[data-theme="etc"] article {
+          grid-template-columns: 1fr;
+        }
+
+        body[data-theme="fashion"] h1 {
+          font-size: 32px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1 id="main-title">Select Sample</h1>
+    <p id="sub-title"></p>
+    <div id="list"></div>
+
+    <script src="./MY_TYPE.js"></script>
+    <script>
+      applyPortfolioTheme();
+
+      const API_BASE = "http://127.0.0.1:8000";
+
+      // 수정필요
+      const TITLE_API = "/api/title";
+      // 수정필요
+      const LIST_API = "/api/items";
+
+      const TITLE_FIELDS = [
+        //                          key:"내가원하는이름"  수정필요
+        { elementId: "main-title", key: "title", emptyText: MY_TYPE + " 목록" },
+
+        {
+          elementId: "sub-title",
+          key: "subtitle", //                          key:"내가원하는이름"  수정필요
+          emptyText: "등록된 " + MY_TYPE + " 설명이 없습니다.",
+        },
+      ];
+
+      const LIST_FIELDS = [
+        //             key:"내가원하는이름"  수정필요
+        { label: "내용", key: "content" },
+
+        { label: "이미지", key: "img_url", type: "image" },
+
+        // field 추가할시 수정 필요.
+        { label: "수량", key: "cnt" },
+      ];
+
+      function apiUrl(path) {
+        return API_BASE + path;
+      }
+
+      function imageUrl(path) {
+        if (!path) {
+          return "";
+        }
+
+        if (
+          path.startsWith("http://") ||
+          path.startsWith("https://") ||
+          path.startsWith("data:")
+        ) {
+          return path;
+        }
+
+        return API_BASE + path;
+      }
+
+      async function loadPageTitle() {
+        const response = await fetch(apiUrl(TITLE_API));
+        const result = await response.json();
+        const data = result.data;
+
+        TITLE_FIELDS.forEach(function (field) {
+          const element = document.querySelector("#" + field.elementId);
+
+          if (!data) {
+            element.textContent = field.emptyText;
+            return;
+          }
+
+          element.textContent = data[field.key] || field.emptyText;
+        });
+      }
+
+      async function loadList() {
+        const response = await fetch(apiUrl(LIST_API));
+        const result = await response.json();
+        const rows = result.data;
+        const list = document.querySelector("#list");
+
+        if (rows.length === 0) {
+          list.innerHTML = `<p>등록된 ${MY_TYPE} 데이터가 없습니다.</p>`;
+          return;
+        }
+
+        list.innerHTML = rows
+          .map(function (row) {
+            const fieldHtml = LIST_FIELDS.map(function (field) {
+              const value = row[field.key] || "";
+
+              if (field.type === "image") {
+                return value ? `<img src="${imageUrl(value)}" alt="">` : "";
+              }
+
+              return `<p><b>${field.label}</b>: ${value}</p>`;
+            }).join("");
+
+            return `
+          <article>
+            ${fieldHtml}
+          </article>
+        `;
+          })
+          .join("");
+      }
+
+      loadPageTitle();
+      loadList();
+    </script>
+  </body>
+</html>

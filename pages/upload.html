@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Upload Sample</title>
+    <style>
+      :root {
+        --page-bg: #f7f7f7;
+        --text-color: #222222;
+        --point-color: #2563eb;
+        --soft-color: #eef2ff;
+        --line-color: #dddddd;
+        --panel-bg: #ffffff;
+        --input-bg: #ffffff;
+        --radius: 4px;
+      }
+
+      body {
+        max-width: 760px;
+        margin: 36px auto;
+        padding: 0 20px;
+        font-family: Arial, sans-serif;
+        line-height: 1.5;
+        color: var(--text-color);
+        background: var(--page-bg);
+      }
+
+      body::before {
+        display: block;
+        width: fit-content;
+        margin-bottom: 14px;
+        padding: 6px 12px;
+        border: 1px solid var(--line-color);
+        border-radius: 999px;
+        background: var(--soft-color);
+        color: var(--point-color);
+        font-size: 13px;
+        font-weight: bold;
+      }
+
+      body[data-theme="farm"] {
+        --page-bg: #f4f8ee;
+        --text-color: #263522;
+        --point-color: #3f7d20;
+        --soft-color: #e5f1d5;
+        --line-color: #9fbd78;
+        --panel-bg: #fffff7;
+        --input-bg: #fbfff5;
+        --radius: 10px;
+        max-width: 820px;
+      }
+
+      body[data-theme="farm"]::before {
+        content: "FARM MARKET";
+      }
+
+      body[data-theme="sea"] {
+        --page-bg: #eef8fb;
+        --text-color: #173244;
+        --point-color: #087ea4;
+        --soft-color: #d8f1f8;
+        --line-color: #8dc7d9;
+        --panel-bg: #ffffff;
+        --input-bg: #f7fdff;
+        --radius: 2px;
+        max-width: 980px;
+      }
+
+      body[data-theme="sea"]::before {
+        content: "SEA FRESH";
+      }
+
+      body[data-theme="fashion"] {
+        --page-bg: #fff5f8;
+        --text-color: #2d2530;
+        --point-color: #b83280;
+        --soft-color: #fde2ee;
+        --line-color: #e2a4c4;
+        --panel-bg: #ffffff;
+        --input-bg: #fff9fb;
+        --radius: 14px;
+        max-width: 720px;
+      }
+
+      body[data-theme="fashion"]::before {
+        content: "FASHION LOOK";
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      body[data-theme="etc"] {
+        --page-bg: #f8f6f0;
+        --text-color: #2f2f2f;
+        --point-color: #7c5c22;
+        --soft-color: #efe5cf;
+        --line-color: #c8b58b;
+        --panel-bg: #ffffff;
+        --input-bg: #fffdf8;
+        --radius: 6px;
+        max-width: 760px;
+      }
+
+      body[data-theme="etc"]::before {
+        content: "BASIC NOTE";
+      }
+
+      h1 {
+        color: var(--point-color);
+        border-bottom: 4px solid var(--soft-color);
+        padding-bottom: 10px;
+      }
+
+      body[data-theme="fashion"] h1 {
+        text-align: center;
+        font-size: 40px;
+        border-bottom: 0;
+      }
+
+      body[data-theme="sea"] h1 {
+        border-left: 10px solid var(--point-color);
+        border-bottom: 0;
+        padding: 12px 0 12px 16px;
+        background: var(--soft-color);
+      }
+
+      body[data-theme="etc"] h1 {
+        border-bottom: 1px solid var(--line-color);
+        color: var(--text-color);
+      }
+
+      h2 {
+        margin-top: 26px;
+        color: var(--text-color);
+      }
+
+      body[data-theme="fashion"] h2 {
+        text-align: center;
+      }
+
+      form {
+        display: grid;
+        gap: 8px;
+        margin: 18px 0 32px;
+        padding: 18px;
+        border: 1px solid var(--line-color);
+        border-radius: var(--radius);
+        background: var(--panel-bg);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+      }
+
+      body[data-theme="sea"] form {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      body[data-theme="sea"] form {
+        border-left: 6px solid var(--point-color);
+      }
+
+      body[data-theme="fashion"] form {
+        border-top: 6px solid var(--point-color);
+      }
+
+      body[data-theme="farm"] form {
+        border-bottom: 6px solid var(--point-color);
+      }
+
+      body[data-theme="fashion"] form {
+        padding: 24px;
+        gap: 12px;
+        box-shadow: 0 12px 30px rgba(184, 50, 128, 0.16);
+      }
+
+      body[data-theme="etc"] form {
+        padding: 0 0 20px;
+        border-width: 0 0 1px;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      input,
+      textarea,
+      button {
+        padding: 10px;
+        font: inherit;
+        border-radius: var(--radius);
+      }
+
+      textarea {
+        min-height: 100px;
+      }
+
+      input,
+      textarea {
+        border: 1px solid var(--line-color);
+        background: var(--input-bg);
+      }
+
+      body[data-theme="sea"] form div,
+      body[data-theme="sea"] form button {
+        grid-column: 1 / -1;
+      }
+
+      body[data-theme="fashion"] input,
+      body[data-theme="fashion"] textarea {
+        padding: 14px;
+      }
+
+      body[data-theme="etc"] input,
+      body[data-theme="etc"] textarea {
+        border-width: 0 0 1px;
+        border-radius: 0;
+        background: transparent;
+      }
+
+      button {
+        width: fit-content;
+        border: 0;
+        background: var(--point-color);
+        color: white;
+        cursor: pointer;
+      }
+
+      body[data-theme="fashion"] button {
+        width: 100%;
+        padding: 14px;
+        font-weight: bold;
+      }
+
+      body[data-theme="sea"] button {
+        justify-self: end;
+      }
+
+      pre {
+        padding: 12px;
+        background: var(--soft-color);
+        border: 1px solid var(--line-color);
+        border-radius: var(--radius);
+        white-space: pre-wrap;
+      }
+
+      @media (max-width: 640px) {
+        body[data-theme="sea"] form {
+          grid-template-columns: 1fr;
+        }
+
+        body[data-theme="fashion"] h1 {
+          font-size: 32px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1 id="page-title">Upload Sample</h1>
+
+    <h2>1. Add Title</h2>
+    <form id="title-form">
+      <!-- 수정필요 -->
+      <input name="title" placeholder="큰 제목 예" required />
+      <!-- 수정필요 -->
+      <input name="subtitle" placeholder="작은 제목" required />
+
+      <button type="submit">Save Title</button>
+    </form>
+
+    <h2>2. Add Content</h2>
+    <form id="content-form">
+      <!-- 수정필요 -->
+      <input name="content" placeholder="내용" />
+
+      <div>파일첨부, 이미지 url 직접 입력중 하나만 선택.</div>
+
+      <!-- 수정필요 -->
+      <input name="img_url" placeholder="이미지 url" />
+
+      <!-- 더 필요한 field 들이 있으면 서버가 받을수 있는 key 와 맞춰서 추가 ... -->
+
+      <input name="image" type="file" accept="image/*" />
+
+      <!-- 수정필요 -->
+      <input name="cnt" placeholder="수량" type="number" />
+
+      <button type="submit">Save Content</button>
+    </form>
+
+    <h2>Response</h2>
+    <pre id="result">No request yet.</pre>
+
+    <script src="./MY_TYPE.js"></script>
+    <script>
+      applyPortfolioTheme();
+
+      const API_BASE = "http://127.0.0.1:8000";
+      const ADD_TITLE_API = "/api/add_title"; // 수정필요
+      const ADD_CONTENT_API = "/api/add_item"; // 수정필요
+
+      async function sendForm(form, apiPath) {
+        const formData = new FormData(form);
+        const response = await fetch(API_BASE + apiPath, {
+          method: "POST",
+          body: formData,
+        });
+        const data = await response.json();
+        document.querySelector("#result").textContent = JSON.stringify(
+          data,
+          null,
+          2,
+        );
+        return data;
+      }
+
+      document
+        .querySelector("#title-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          sendForm(event.target, ADD_TITLE_API);
+        });
+
+      document
+        .querySelector("#content-form")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+          const data = await sendForm(event.target, ADD_CONTENT_API);
+
+          if (data.result === "success") {
+            event.target.reset();
+          }
+        });
+    </script>
+  </body>
+</html>
