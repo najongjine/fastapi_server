@@ -17,7 +17,7 @@ async def batch_job():
                 conn.close()
 
             now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            print(f"[batch] {total}")
+            print(f"[batch] DB connection OK {total}")
         except Exception as error:
             print(f"[batch error] {error}")
 
